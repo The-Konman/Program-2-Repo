@@ -5,12 +5,12 @@
 int main()
 {
 
+    Stack<Movie> MovieStack;
     int choice;
     do
     {
         //printMenu();
-        //Validate user input is an integer 
-        //and in the corrent range
+        //Validate user input is in the correct range
         cin >> choice;
         while(choice>10||choice<1)
         {

@@ -21,12 +21,16 @@ class ListNode
            return value;
         }
 
-        ListNode<T>::setValue(T v)
+        ListNode<T>::setNode(T v)
         {
             value = v;
         }
 
-        //***Next function needs work, not really sure about it 
+        ListNode<T>::getNext()
+        {
+            return next->getNode();
+        }
+
         ListNode<T>::setNext(T n)
         {
             next = n;

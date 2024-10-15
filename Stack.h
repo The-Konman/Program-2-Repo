@@ -12,7 +12,7 @@ class Stack
 {
     
     private:
-        ListNode* head;
+        ListNode* top;
 
 
     
@@ -57,7 +57,7 @@ Stack<T>::~Stack()
     nodePtr = top;
     while (nodePtr != NULL)
     {
-        nextNode = nodePtr.next();
+        nextNode = nodePtr.getNext();
         delete nodePtr;
         nodePtr = nextNode;
     }
@@ -81,11 +81,11 @@ void Stack<T>::push(T item)
     if(isEmpty())
     {
         top = newNode;
-        newNode.next() = NULL;
+        newNode.setNext(NULL);
     }
     else
     {
-        newNode.next() = top;
+        newNode.setNext(top);
         top = newNode;
     }
 }
@@ -108,7 +108,7 @@ void Stack<T>::pop(T &item)
     }
     else
     {
-        item = top.getValue();
+        item = top->value;
         temp = top->next;
         delete top;
         top = temp;
