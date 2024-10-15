@@ -21,15 +21,15 @@ class ListNode
            return value;
         }
 
-        ListNode<T>::setValue()
+        ListNode<T>::setValue(T v)
         {
-            cin >> value;
+            value = v;
         }
 
         //***Next function needs work, not really sure about it 
-        ListNode<T>::next()
+        ListNode<T>::setNext(T n)
         {
-            next;
+            next = n;
         }
 
         ListNode<T>::~ListNode()

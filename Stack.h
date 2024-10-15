@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include "ListNode.h"
 using namespace std;
 
 template <typename T>
@@ -12,7 +13,6 @@ class Stack
     
     private:
         ListNode* head;
-        ListNode* tail;
 
 
     
@@ -108,7 +108,7 @@ void Stack<T>::pop(T &item)
     }
     else
     {
-        item = top->value;
+        item = top.getValue();
         temp = top->next;
         delete top;
         top = temp;

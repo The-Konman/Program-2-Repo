@@ -11,13 +11,13 @@ int main()
         //printMenu();
         //Validate user input is an integer 
         //and in the corrent range
-        while(!(cin>>choice))
+        cin >> choice;
+        while(choice>10||choice<1)
         {
-            if(choice>6||choice<1)
-            {
-                cout << "\nWrong choice";
+            
+                cout << "\nWrong choice, pick a valid option.";
                 //printMenu();
-            }
+                cin >> choice;
         }
         //Geeneral switch
         switch(choice)
