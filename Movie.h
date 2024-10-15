@@ -29,6 +29,7 @@ class Movie {
         string getGenre() const;
         int getYear() const;
         int getMovieLength() const;
+        Movie getUserInput() const;
         //Setter prototypes
         void setTitle(string);
         void setGenre(string);
