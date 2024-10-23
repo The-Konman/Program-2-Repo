@@ -28,10 +28,10 @@ class ListNode
 
         ListNode<T>::getNext()
         {
-            return next->getNode();
+            return next;
         }
 
-        ListNode<T>::setNext(T n)
+        ListNode<T>::setNext(ListNode* n)
         {
             next = n;
         }
