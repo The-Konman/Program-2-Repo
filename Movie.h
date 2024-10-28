@@ -46,7 +46,10 @@ class Movie {
             os << "\nTitle: " << m.title;
             os << "\nGenre: " << m.genre;
             os << "\nYear: " << m.year;
-            os << "\nMovie Length: " << m.movieLength;
+            os << "\nLength: " << m.movieLength;
+            os << "\nRating: " << m.movieRating.getMovieRating();
+            os << "\nBox Office: " << m.movieRating.getBoxOffice();
+            os << "\nRotten Tomatoe Score: " << m.movieRating.getRTScore();
             return os;
         }
 
