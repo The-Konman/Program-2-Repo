@@ -15,33 +15,33 @@ class ListNode
 
 
     public:
-
-        ListNode<T>::getNode()
+        //Getters
+        T getNode()
         {
            return value;
-        }
+        } 
 
-        ListNode<T>::setNode(T v)
-        {
-            value = v;
-        }
-
-        ListNode<T>::getNext()
+        ListNode* getNext()
         {
             return next;
         }
 
-        ListNode<T>::setNext(ListNode* n)
+        //Setters
+        void setNode(T v)
+        {
+            value = v;
+        }  
+
+        void setNext(ListNode* n)
         {
             next = n;
         }
 
-        ListNode<T>::~ListNode()
+        //Constructor
+        ListNode(T v)
         {
-            if(ListNode!=NULL)
-            {
-                delete ListNode;
-            }
+            value = v;
+            this->next = NULL;
         }
 
 

@@ -1,6 +1,9 @@
 #include "Stack.h"
 #include "ListNode.h"
+#include "Rating.h"
 #include "Movie.h"
+#include <iostream>
+using namespace std;
 
 void printMenu();
 

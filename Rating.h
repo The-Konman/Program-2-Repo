@@ -7,7 +7,6 @@
 #ifndef RATING_H
 #define RATING_H
 
-#include "Movie.h"
 #include <iostream>
 #include <string>
 #include <fstream>
