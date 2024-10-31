@@ -44,6 +44,12 @@ class ListNode
             this->next = NULL;
         }
 
+        //Default constructor
+        ListNode()
+        {
+            this->next = NULL;
+        }
+
 
 
 };

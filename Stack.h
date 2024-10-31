@@ -12,9 +12,8 @@ class Stack
 {
     
     private:
-        ListNode* top;
-
-
+        ListNode<T> *top;
+        
     
     public:
         //Constructor prototype
@@ -51,13 +50,13 @@ Stack<T>::Stack()
 template <typename T>
 Stack<T>::~Stack()
 {
-    ListNode *nodePtr, *nextNode;
+    ListNode<T> *nodePtr, *nextNode;
 
     //Delete every node in the list until nodePtr gets to NULL
     nodePtr = top;
     while (nodePtr != NULL)
     {
-        nextNode = nodePtr.getNext();
+        nextNode = nodePtr->getNext();
         delete nodePtr;
         nodePtr = nextNode;
     }
@@ -72,20 +71,20 @@ Stack<T>::~Stack()
 template <typename T>
 void Stack<T>::push(T item)
 {
-    ListNode *newNode = NULL;
-    newNode = new ListNode;
-    newNode.setValue(item);
+    ListNode<T> *newNode = NULL;
+    newNode = new ListNode<T>;
+    newNode->setNode(item);
 
     //If there aren't any nodes, newNode becomes the first. 
     //If there are nodes, it goes right before the current top and becomes the top
     if(isEmpty())
     {
         top = newNode;
-        newNode.setNext(NULL);
+        newNode->setNext(NULL);
     }
     else
     {
-        newNode.setNext(top);
+        newNode->setNext(top);
         top = newNode;
     }
 }
@@ -99,7 +98,7 @@ void Stack<T>::push(T item)
 template <typename T>
 void Stack<T>::pop(T &item)  
 {
-    ListNode *temp = NULL;
+    ListNode<T> *temp = NULL;
 
     //If it's not empty, remove the top element and reassign pointers
     if(isEmpty())
@@ -108,8 +107,8 @@ void Stack<T>::pop(T &item)
     }
     else
     {
-        item = top->value;
-        temp = top->next;
+        item = top->getNode();
+        temp = top->getNext();
         delete top;
         top = temp;
     }
