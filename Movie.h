@@ -52,6 +52,20 @@ class Movie {
             return os;
         }
 
+        bool operator>(const Movie& m)
+        {
+            return this->year > m.year;
+        }
+        
+        bool operator<(const Movie& m)
+        {
+            return this->year < m.year;
+        }
+
+        bool operator==(const Movie& m)
+        {
+            return this->year == m.year;
+        }
 };
 
 

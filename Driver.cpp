@@ -27,7 +27,7 @@ int main()
                 printMenu();
                 cin >> choice;
         }
-        //Geeneral switch
+        //General switch
         switch(choice)
         {
             //Add movie 
@@ -82,6 +82,9 @@ int main()
             case 5:
 
                 break;
+
+            case 8:
+                
         }
         
     }while(choice!=11);

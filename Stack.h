@@ -153,7 +153,6 @@ void Stack<T>::displayStack()
     int count = 0;
     if(!(isEmpty()))
     {
-        //Currently working on this
         while(temp->getNext()!=NULL)
         {
             count++;
