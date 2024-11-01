@@ -9,6 +9,7 @@
 #define MOVIE_H
 
 #include "Rating.h"
+#include "ListNode.h"
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -24,17 +25,22 @@ class Movie {
 
     public:
         Rating movieRating;
+
         //Getter prototypes
         string getTitle() const;
         string getGenre() const;
         int getYear() const;
         int getMovieLength() const;
         Movie getUserInput() const;
+
         //Setter prototypes
         void setTitle(string);
         void setGenre(string);
         void setYear(int);
         void setMovieLength(int);
+
+        string findOldest();
+        string findNewest();
 
         //Constructor prototype
         Movie();

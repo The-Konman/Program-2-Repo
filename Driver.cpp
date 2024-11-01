@@ -20,7 +20,7 @@ int main()
         printMenu();
         cin >> choice;
         //Validate user input is in the correct range
-        while(choice>10||choice<1)
+        while(choice>11||choice<1)
         {
             
                 cout << "\nWrong choice, pick a valid option.";
@@ -82,9 +82,26 @@ int main()
             case 5:
 
                 break;
-
-            case 8:
+            
+            case 6:
                 
+                break;
+
+            case 7:
+
+                break;
+
+            case 8: 
+
+                break;
+
+            case 9: 
+
+                break;
+            
+            case 10:
+
+                break;
         }
         
     }while(choice!=11);

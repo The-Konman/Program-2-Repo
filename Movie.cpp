@@ -41,6 +41,17 @@
         {
             movieLength = m;
         }
+
+        string findOldest() 
+        {
+
+
+        }
+        string findNewest()
+        {
+
+        }
+
         //Default Constructor
         Movie::Movie()
         {
@@ -61,5 +72,6 @@
             year = y;
             movieLength = mL;
         }
+
 
         
