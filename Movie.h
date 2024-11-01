@@ -42,7 +42,6 @@ class Movie {
 
         friend std::ostream& operator<<(std::ostream& os, const Movie& m)
         {
-            os << "\nCURRENT MOVIE";
             os << "\nTitle: " << m.title;
             os << "\nGenre: " << m.genre;
             os << "\nYear: " << m.year;

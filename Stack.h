@@ -7,6 +7,9 @@
 #include "ListNode.h"
 using namespace std;
 
+
+//DELETE LATER, FOR TESTING
+//cout << "\nTEST\n";
 template <typename T>
 class Stack
 {
@@ -24,8 +27,10 @@ class Stack
    
         //Member function prototypes
         void push(T);
-        void pop(T &);
+        void pop();
         bool isEmpty();
+        void displayStack();
+        void displayNode();
 
     
 
@@ -96,18 +101,17 @@ void Stack<T>::push(T item)
     Return type: void
 */
 template <typename T>
-void Stack<T>::pop(T &item)  
+void Stack<T>::pop()  
 {
     ListNode<T> *temp = NULL;
 
     //If it's not empty, remove the top element and reassign pointers
     if(isEmpty())
     { 
-        cout << "The stack is empty.\n";
+        cout << "\nThe stack is empty.\n";
     }
     else
     {
-        item = top->getNode();
         temp = top->getNext();
         delete top;
         top = temp;
@@ -137,7 +141,52 @@ bool Stack<T>::isEmpty()
     return status;
 }
 
+/*
+    Member Function Name: displayStack()
+    Purpose: Displays the entire stack
+    Return type: void
+*/
+template <typename T>
+void Stack<T>::displayStack()
+{
+    ListNode<T>* temp;
+    int count = 0;
+    if(!(isEmpty()))
+    {
+        //Currently working on this
+        while(temp->getNext()!=NULL)
+        {
+            count++;
+            cout << "\n\nItem #" << count;
+            cout << endl << top->getNode();
+            temp = top->getNext();
+        }
+        count++;
+        cout << "\n\nItem #" << count;
+        cout << top->getNode();
+    }
+    else
+    {
+        cout << "\nThe stack is empty.\n";
+    }
+    
+}
 
 
+/*
+    Member Function Name: displayNode()
+    Purpose: Displays the current node
+    Return type: void
+*/
+template <typename T>
+void Stack<T>::displayNode()
+{
+    if(!(isEmpty()))
+        cout << top->getNode();
+    else
+    {
+        cout << "\nThe stack is empty.\n";
+    }
+}
 
 #endif

@@ -68,15 +68,23 @@ int main()
             //Remove the movie ad the top of the stack
             case 2:
                 //Not sure about this one yet
-                MovieStack.pop(movie);
+                MovieStack.pop();
                 break;
 
             case 3:
+                MovieStack.displayNode();
+                break;
+
+            case 4:
+                MovieStack.displayStack();
+                break;
+
+            case 5:
 
                 break;
         }
         
-    }while(choice!=10);
+    }while(choice!=11);
     
 
 
@@ -88,10 +96,9 @@ int main()
 
 
 /*
-    Function Name:
-
-
-
+    Function Name: printMenu()
+    Purpose: Displays the user menu
+    Return type: void
 */
 void printMenu()
 {
@@ -101,7 +108,7 @@ void printMenu()
     cout <<   "\n\t1. Add to Movie Stack";
     cout <<   "\n\t2. Remove Current Movie";
     cout <<   "\n\t3. Display the Current Movie";
-    cout <<   "\n\t4. Display the Entrie Stack";
+    cout <<   "\n\t4. Display the Entire Stack";
     cout <<   "\n\t5. Find Movie";
     cout <<   "\n\t6. Find Oldest";
     cout <<   "\n\t7. Find Newest";
@@ -109,7 +116,6 @@ void printMenu()
     cout <<   "\n\t9. Sort Movies by Newest";
     cout <<   "\n\t10. Delete Movie Stack";
     cout <<   "\n\t11. Leave Program";
-
     cout << "\n\tChoose 1-10: ";
 
 
