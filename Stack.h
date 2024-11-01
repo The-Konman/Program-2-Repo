@@ -149,7 +149,7 @@ bool Stack<T>::isEmpty()
 template <typename T>
 void Stack<T>::displayStack()
 {
-    ListNode<T>* temp;
+    ListNode<T>* temp = top;
     int count = 0;
     if(!(isEmpty()))
     {
@@ -158,12 +158,12 @@ void Stack<T>::displayStack()
         {
             count++;
             cout << "\n\nItem #" << count;
-            cout << endl << top->getNode();
-            temp = top->getNext();
+            cout << endl << temp->getNode();
+            temp = temp->getNext();
         }
         count++;
         cout << "\n\nItem #" << count;
-        cout << top->getNode();
+        cout << temp->getNode();
     }
     else
     {

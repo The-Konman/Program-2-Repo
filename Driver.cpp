@@ -67,7 +67,7 @@ int main()
                 break;
             //Remove the movie ad the top of the stack
             case 2:
-                //Not sure about this one yet
+                cout << "\n\nRemoving the element at the top of the stack!";
                 MovieStack.pop();
                 break;
 
