@@ -31,6 +31,8 @@ class Stack
         bool isEmpty();
         void displayStack();
         void displayNode();
+        void deleteStack();
+        ListNode<T>* getTail();
 
     
 
@@ -120,6 +122,28 @@ void Stack<T>::pop()
 
 
 /*
+    Member Function Name: deleteStack()
+    Purpose: Deletes the top node of the stack
+    Return type: void
+*/
+template <typename T>
+void Stack<T>::deleteStack()
+{
+    ListNode<T> *nodePtr, *nextNode;
+
+    //Delete every node in the list until nodePtr gets to NULL
+    nodePtr = top;
+    while (nodePtr != NULL)
+    {
+        nextNode = nodePtr->getNext();
+        delete nodePtr;
+        nodePtr = nextNode;
+    }
+    top = NULL;
+}
+
+
+/*
     Member Function Name: isEmpty()
     Purpose: Checks if the stack is empty 
     Return type: bool
@@ -171,6 +195,22 @@ void Stack<T>::displayStack()
     
 }
 
+/*
+    Member Function Name: getTail()
+    Purpose: Finds the last element of the stack
+    Return type: ListNode<T>*
+*/
+template <typename T>
+ListNode<T>* Stack<T>::getTail()
+{
+    ListNode<T> temp = top;
+    while(temp->getNext()!=NULL)
+    {
+        temp = temp->getNext();
+    }
+    return temp;
+}
+
 
 /*
     Member Function Name: displayNode()
@@ -181,7 +221,10 @@ template <typename T>
 void Stack<T>::displayNode()
 {
     if(!(isEmpty()))
+    {
+        cout << "\nCURRENT NODE:";
         cout << top->getNode();
+    }
     else
     {
         cout << "\nThe stack is empty.\n";
