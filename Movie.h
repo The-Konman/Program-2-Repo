@@ -66,6 +66,9 @@ class Movie {
         {
             return this->year == m.year;
         }
+    
+        
+        //Add '=' operator overload
 };
 
 

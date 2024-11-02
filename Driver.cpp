@@ -22,7 +22,6 @@ int main()
         //Validate user input is in the correct range
         while(choice>11||choice<1)
         {
-            
                 cout << "\nWrong choice, pick a valid option.";
                 printMenu();
                 cin >> choice;
@@ -65,7 +64,7 @@ int main()
                 cout << "\n\nYour movie has been added." << endl;
 
                 break;
-            //Remove the movie ad the top of the stack
+            //Remove the movie at the top of the stack
             case 2:
                 cout << "\n\nRemoving the element at the top of the stack!";
                 MovieStack.pop();

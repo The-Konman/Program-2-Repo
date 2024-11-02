@@ -26,18 +26,25 @@ class Stack
         ~Stack();
    
         //Member function prototypes
+        void swap(T, T);
+        void sortAscending();
+        void sortAscendingHelper(ListNode<T>*, ListNode<T>*);
+        ListNode<T>* partitionAscending(ListNode<T>*, ListNode<T>*);
+        void sortDescending();
+        void sortDecendingHelper(ListNode<T>*, ListNode<T>*);
+        ListNode<T>* partitionDecending(ListNode<T>*, ListNode<T>*);
+        ListNode<T>* getTail();
         void push(T);
         void pop();
         bool isEmpty();
         void displayStack();
         void displayNode();
         void deleteStack();
-        ListNode<T>* getTail();
-
     
 
 };
-        
+
+
 /*
     Member Function Name: Stack()
     Purpose: Constructor for the stack
@@ -49,8 +56,9 @@ Stack<T>::Stack()
     top = NULL;
 }
 
+
 /*
-    Member Function Name: ~Stack()
+    Member Function Name: ~Stack() (destructor)
     Purpose: Deletes the stack
     Return type: none
 */
@@ -69,6 +77,10 @@ Stack<T>::~Stack()
     }
 }
 
+//Still working on this
+template <typename T>
+void Stack<T>::swap(T first, T second)
+{}
 
 /*
     Member Function Name: push()
@@ -165,6 +177,7 @@ bool Stack<T>::isEmpty()
     return status;
 }
 
+
 /*
     Member Function Name: displayStack()
     Purpose: Displays the entire stack
@@ -195,6 +208,7 @@ void Stack<T>::displayStack()
     
 }
 
+
 /*
     Member Function Name: getTail()
     Purpose: Finds the last element of the stack
@@ -211,10 +225,80 @@ ListNode<T>* Stack<T>::getTail()
     return temp;
 }
 
+/*
+    Member Function Name: sortAscending()
+    Purpose: Finds tail node, then uses quick sort helper to sort the movies by year in ascending order
+    Return type: void
+*/
+template <typename T>
+void Stack<T>::sortAscending()  
+{
+    ListNode<T>* tail = getTail();
+    sortAscendingHelper(top, tail);
+}
+
+
+/*
+    Member Function Name: sortAscendingHelper()
+    Purpose: 
+    Return type: void
+*/
+template <typename T>
+void Stack<T>::sortAscendingHelper(ListNode<T>* head, ListNode<T>* tail)  
+{
+    if ((head == NULL)||(head == tail)) 
+        return;
+    
+    // Call partition to find the pivot node
+    ListNode<T>* pivot = partitionAscending(head, tail);
+    
+    // Recursive call for the left part of the list (before the pivot)
+    sortAscendingHelper(head, pivot);
+    
+    // Recursive call for the right part of the list (after the pivot)
+    sortAscendingHelper(pivot->next, tail);
+
+}
+
+
+/*
+    Member Function Name: sortAscendingHelper()
+    Purpose: Finds tail node, then uses quick sort helper to sort the movies by year in ascending order
+    Return type: ListNode<T>*
+*/
+//Still working on this...
+template <typename T>
+ListNode<T>* Stack<T>::partitionAscending(ListNode<T>* head, ListNode<T>* tail)  
+{
+
+    ListNode<T>* pivot = head;
+  
+    // 'pre' and 'curr' are used to shift all 
+      // smaller nodes' data to the left side of the pivot node
+    ListNode<T>* pre = head;
+    ListNode<T>* curr = head;
+
+    // Traverse the list until you reach the node after the tail
+    while (curr != tail->getNext()) {
+        
+        if (curr->getNode() < pivot->getNode()) {
+            swap(curr->getNode(), pre->getNext()->getNode());
+          
+              // Move 'pre' to the next node
+            pre = pre->getNext();
+        }
+        
+          // Move 'curr' to the next node
+        curr = curr->getNext();
+    }
+    
+    //swap(pivot->data, pre->data);
+}
+
 
 /*
     Member Function Name: displayNode()
-    Purpose: Displays the current node
+    Purpose: Displays the current/top node
     Return type: void
 */
 template <typename T>
@@ -230,5 +314,7 @@ void Stack<T>::displayNode()
         cout << "\nThe stack is empty.\n";
     }
 }
+
+
 
 #endif
