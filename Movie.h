@@ -40,6 +40,7 @@ class Movie {
         Movie();
         Movie(string, string, Rating, int, int);
 
+        //Overload insertion operator
         friend std::ostream& operator<<(std::ostream& os, const Movie& m)
         {
             os << "\nTitle: " << m.title;
@@ -52,23 +53,40 @@ class Movie {
             return os;
         }
 
+
+        //Overload comparision operatora
         bool operator>(const Movie& m)
         {
             return this->year > m.year;
         }
-        
         bool operator<(const Movie& m)
         {
             return this->year < m.year;
         }
-
         bool operator==(const Movie& m)
         {
             return this->year == m.year;
         }
     
         
-        //Add '=' operator overload
+        //Overload assignment operator 
+        Movie& operator=(const Movie& m)
+        {
+            // Check for self-assignment
+            if (this != &m) 
+            {
+                this->title = m.title;
+                this->year = m.year;
+                this->genre = m.genre;
+                this->movieLength = m.movieLength;
+                this->movieRating.setMovieRating(m.movieRating.getMovieRating());
+                this->movieRating.setBoxOffice(m.movieRating.getBoxOffice());
+                this->movieRating.setRTScore(m.movieRating.getRTScore());
+            }
+            return *this;
+        }
+
+        
 };
 
 

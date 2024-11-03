@@ -279,9 +279,11 @@ ListNode<T>* Stack<T>::partitionAscending(ListNode<T>* head, ListNode<T>* tail)
     ListNode<T>* curr = head;
 
     // Traverse the list until you reach the node after the tail
-    while (curr != tail->getNext()) {
+    while (curr != tail->getNext()) 
+    {
         
-        if (curr->getNode() < pivot->getNode()) {
+        if (curr->getNode() < pivot->getNode()) 
+        {
             swap(curr->getNode(), pre->getNext()->getNode());
           
               // Move 'pre' to the next node
