@@ -78,7 +78,7 @@ class Movie {
         //Overload assignment operator 
         Movie& operator=(const Movie& m)
         {
-            // Check for self-assignment
+            //Check for self assignment
             if (this != &m) 
             {
                 this->title = m.title;

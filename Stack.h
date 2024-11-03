@@ -26,8 +26,9 @@ class Stack
         ~Stack();
    
         //Member function prototypes
-        void swap(T, T);
-        void sortAscending();
+        ListNode<T>* getTop() const;
+        void setTop(ListNode<T>*);
+        ListNode<T>* sortAscending(ListNode<T>*);
         void sortAscendingHelper(ListNode<T>*, ListNode<T>*);
         ListNode<T>* partitionAscending(ListNode<T>*, ListNode<T>*);
         void sortDescending();
@@ -43,6 +44,19 @@ class Stack
     
 
 };
+
+template <typename T>
+void Stack<T>::setTop(ListNode<T>* t)
+{
+    top = t;
+}
+
+
+template <typename T>
+ListNode<T>* Stack<T>::getTop() const
+{
+    return top;
+}
 
 
 /*
@@ -77,19 +91,6 @@ Stack<T>::~Stack()
     }
 }
 
-
-/*
-    Member Function Name: swap()
-    Purpose: Swaps two values of data type T
-    Return type: void
-*/
-template <typename T>
-void Stack<T>::swap(T first, T second)
-{
-    T temp = first;
-    first = second;
-    second = temp;
-}
 
 
 /*
@@ -243,10 +244,11 @@ ListNode<T>* Stack<T>::getTail()
     Return type: void
 */
 template <typename T>
-void Stack<T>::sortAscending()  
+ListNode<T>* Stack<T>::sortAscending(ListNode<T>* head)  
 {
     ListNode<T>* tail = getTail();
-    sortAscendingHelper(top, tail);
+    sortAscendingHelper(head, tail);
+    return head;
 }
 
 
@@ -267,18 +269,20 @@ void Stack<T>::sortAscendingHelper(ListNode<T>* head, ListNode<T>* tail)
     
     // Call partition to find the pivot node
     ListNode<T>* pivot = partitionAscending(head, tail);
+    cout << "\n\n\nTEST FOR CURRENT PIVOT\n";
+    cout << pivot->getNode();
 
     // Recursive call for the left part of the list (before the pivot)
     sortAscendingHelper(head, pivot);
     
     // Recursive call for the right part of the list (after the pivot)
-    sortAscendingHelper(pivot->getNext(), tail);
+    sortAscendingHelper((pivot->getNext()), tail);
 
 }
 
 
 /*
-    Member Function Name: sortAscendingHelper()
+    Member Function Name: partitionAscending()
     Purpose: Finds tail node, then uses quick sort helper to sort the movies by year in ascending order
     Return type: ListNode<T>*
 */
@@ -294,20 +298,25 @@ ListNode<T>* Stack<T>::partitionAscending(ListNode<T>* head, ListNode<T>* tail)
     ListNode<T>* curr = head;
 
     // Traverse the list until you reach the node after the tail
-    while(curr != tail->getNext()) 
+    while(curr!=(tail->getNext())) 
     {
         
-        if(curr->getNode() < pivot->getNode()) 
+        if((curr->getNode())<(pivot->getNode())) 
         {
+            T temp = curr->getNode();
+            curr->getNode() = pre->getNext()->getNode();
+            pre->getNext()->getNode() = temp;
+
             pre = pre->getNext();
-            swap(curr->getNode(), pre->getNode());
         }
         
           // Move 'curr' to the next node
         curr = curr->getNext();
     }
     
-    swap(pivot->getNode(), pre->getNode());
+    T currData = pivot->getNode();
+    pivot->getNode() = pre->getNode();
+    pre->getNode() = currData;
 
     return pre;
 }

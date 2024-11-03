@@ -93,7 +93,7 @@ int main()
                 break;
             //Sort movie stack by oldest
             case 8:
-                MovieStack.sortAscending();
+                MovieStack.setTop(MovieStack.sortAscending(MovieStack.getTop()));
                 break;
             //Sort movie stack by newest
             case 9:
