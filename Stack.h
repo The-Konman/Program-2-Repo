@@ -77,10 +77,18 @@ Stack<T>::~Stack()
     }
 }
 
-//Still working on this
+/*
+    Member Function Name: swap()
+    Purpose: Swaps 2 values of data type T
+    Return type: void
+*/
 template <typename T>
 void Stack<T>::swap(T first, T second)
-{}
+{
+    T temp = first;
+    first = second;
+    second = temp;
+}
 
 /*
     Member Function Name: push()
