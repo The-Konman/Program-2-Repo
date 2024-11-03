@@ -83,6 +83,9 @@ int main()
 
                 break;
 
+            //Find the oldest movie    
+            case 6:
+
                 break;
             //Find the most recent movie
             case 7:
@@ -131,6 +134,7 @@ void printMenu()
     cout <<   "\n\t9. Sort Movies by Newest";
     cout <<   "\n\t10. Delete Movie Stack";
     cout <<   "\n\t11. Leave Program";
-    cout << "\n\tChoose 1-10: ";
-    
+    cout << "\n\tChoose 1-11: ";
+
+
 }

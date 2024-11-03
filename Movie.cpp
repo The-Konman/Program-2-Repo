@@ -44,12 +44,14 @@
 
         string findOldest() 
         {
-
-
+            string oldest;
+            return oldest;
+            
         }
         string findNewest()
         {
-
+            string newest;
+            return newest;
         }
 
         //Default Constructor
