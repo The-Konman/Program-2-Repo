@@ -32,7 +32,7 @@ class Stack
         ListNode<T>* partitionAscending(ListNode<T>*, ListNode<T>*);
         void sortDescending();
         void sortDecendingHelper(ListNode<T>*, ListNode<T>*);
-        ListNode<T>* partitionDecending(ListNode<T>*, ListNode<T>*);
+        ListNode<T>* partitionDescending(ListNode<T>*, ListNode<T>*);
         ListNode<T>* getTail();
         void push(T);
         void pop();
@@ -77,9 +77,10 @@ Stack<T>::~Stack()
     }
 }
 
+
 /*
     Member Function Name: swap()
-    Purpose: Swaps 2 values of data type T
+    Purpose: Swaps two values of data type T
     Return type: void
 */
 template <typename T>
@@ -89,6 +90,7 @@ void Stack<T>::swap(T first, T second)
     first = second;
     second = temp;
 }
+
 
 /*
     Member Function Name: push()
@@ -202,7 +204,7 @@ void Stack<T>::displayStack()
         {
             count++;
             cout << "\n\nItem #" << count;
-            cout << endl << temp->getNode();
+            cout << temp->getNode();
             temp = temp->getNext();
         }
         count++;
@@ -225,13 +227,15 @@ void Stack<T>::displayStack()
 template <typename T>
 ListNode<T>* Stack<T>::getTail()
 {
-    ListNode<T> temp = top;
-    while(temp->getNext()!=NULL)
+    ListNode<T>* temp = top;
+    while((temp->getNext()!=NULL)&&(temp != NULL))
     {
         temp = temp->getNext();
     }
+    
     return temp;
 }
+   
 
 /*
     Member Function Name: sortAscending()
@@ -248,23 +252,27 @@ void Stack<T>::sortAscending()
 
 /*
     Member Function Name: sortAscendingHelper()
-    Purpose: 
+    Purpose: Finds the pivot of the list of recursively sorts each side before and after the pivot
     Return type: void
 */
 template <typename T>
 void Stack<T>::sortAscendingHelper(ListNode<T>* head, ListNode<T>* tail)  
 {
-    if ((head == NULL)||(head == tail)) 
+    //Something is wrong here, still trying to figure it out
+    if((head==NULL)||(head==tail)) 
+    {
+        cout << "\n\nTEST\n\n";
         return;
+    }
     
     // Call partition to find the pivot node
     ListNode<T>* pivot = partitionAscending(head, tail);
-    
+
     // Recursive call for the left part of the list (before the pivot)
     sortAscendingHelper(head, pivot);
     
     // Recursive call for the right part of the list (after the pivot)
-    sortAscendingHelper(pivot->next, tail);
+    sortAscendingHelper(pivot->getNext(), tail);
 
 }
 
@@ -274,7 +282,6 @@ void Stack<T>::sortAscendingHelper(ListNode<T>* head, ListNode<T>* tail)
     Purpose: Finds tail node, then uses quick sort helper to sort the movies by year in ascending order
     Return type: ListNode<T>*
 */
-//Still working on this...
 template <typename T>
 ListNode<T>* Stack<T>::partitionAscending(ListNode<T>* head, ListNode<T>* tail)  
 {
@@ -287,22 +294,22 @@ ListNode<T>* Stack<T>::partitionAscending(ListNode<T>* head, ListNode<T>* tail)
     ListNode<T>* curr = head;
 
     // Traverse the list until you reach the node after the tail
-    while (curr != tail->getNext()) 
+    while(curr != tail->getNext()) 
     {
         
-        if (curr->getNode() < pivot->getNode()) 
+        if(curr->getNode() < pivot->getNode()) 
         {
-            swap(curr->getNode(), pre->getNext()->getNode());
-          
-              // Move 'pre' to the next node
             pre = pre->getNext();
+            swap(curr->getNode(), pre->getNode());
         }
         
           // Move 'curr' to the next node
         curr = curr->getNext();
     }
     
-    //swap(pivot->data, pre->data);
+    swap(pivot->getNode(), pre->getNode());
+
+    return pre;
 }
 
 

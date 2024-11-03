@@ -92,11 +92,11 @@ int main()
                 break;
             //Sort movie stack by oldest
             case 8:
-
+                MovieStack.sortAscending();
                 break;
             //Sort movie stack by newest
             case 9:
-
+                //MovieStack.sortDescending();
                 break; 
             //Delete the entire movie stack
             case 10:
@@ -108,10 +108,6 @@ int main()
     }while(choice!=11);
     
     cout << "\n\nLeaving the movie stack program. Thanks!\n\n";
-
-
-
-
     return 0;
 }
 
@@ -138,6 +134,5 @@ void printMenu()
     cout <<   "\n\t10. Delete Movie Stack";
     cout <<   "\n\t11. Leave Program";
     cout << "\n\tChoose 1-10: ";
-
-
+    
 }
