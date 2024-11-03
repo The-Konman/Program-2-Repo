@@ -92,7 +92,7 @@ int main()
                 break;
             //Sort movie stack by oldest
             case 8:
-                MovieStack.sortAscending();
+                MovieStack.setTop(MovieStack.sortAscending(MovieStack.getTop()));
                 break;
             //Sort movie stack by newest
             case 9:
@@ -134,5 +134,5 @@ void printMenu()
     cout <<   "\n\t10. Delete Movie Stack";
     cout <<   "\n\t11. Leave Program";
     cout << "\n\tChoose 1-10: ";
-    
+
 }
