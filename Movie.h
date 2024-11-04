@@ -39,9 +39,6 @@ class Movie {
         void setYear(int);
         void setMovieLength(int);
 
-        string findOldest();
-        string findNewest();
-
         //Constructor prototype
         Movie();
         Movie(string, string, Rating, int, int);

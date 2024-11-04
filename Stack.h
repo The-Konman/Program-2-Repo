@@ -28,12 +28,20 @@ class Stack
         //Member function prototypes
         ListNode<T>* getTop() const;
         void setTop(ListNode<T>*);
+        
+        //ascending functions
         ListNode<T>* sortAscending(ListNode<T>*);
         void sortAscendingHelper(ListNode<T>*, ListNode<T>*);
         ListNode<T>* partitionAscending(ListNode<T>*, ListNode<T>*);
+
+        //descending functions
         void sortDescending();
         void sortDecendingHelper(ListNode<T>*, ListNode<T>*);
         ListNode<T>* partitionDescending(ListNode<T>*, ListNode<T>*);
+
+        ListNode<T>* FindOldest();
+        ListNode<T>* FindNewest();
+
         ListNode<T>* getTail();
         void push(T);
         void pop();
@@ -214,7 +222,7 @@ void Stack<T>::displayStack()
     }
     else
     {
-        cout << "\nThe stack is empty.\n";
+        cout << "\nThe stack is empty." << endl;
     }
     
 }
@@ -341,6 +349,63 @@ void Stack<T>::displayNode()
     }
 }
 
+//still broken
+template <typename T>
+ListNode<T>* Stack<T>::FindOldest()
+{
+    ListNode<T>* temp = top;
+    ListNode<T>* oldest = top;
+    if(!(isEmpty()))
+    {
+        while(temp->getNext() != NULL)
+        {
+            if (oldest > temp) 
+            {
+                oldest = temp;
+                temp = temp->getNext();
+            }
+            else 
+            {
+                temp = temp->getNext();
+            }
+        }
+        return oldest;
+    }
+    else
+    {
+        cout << "The Stack is empty." << endl;
+        return oldest;
+    }
+}
+
+//still broken
+template <typename T>
+ListNode<T>* Stack<T>::FindNewest()
+{
+    ListNode<T>* temp = top;
+    ListNode<T>* newest = top;
+    if(!(isEmpty()))
+    {
+        while(temp->getNext() != NULL)
+        {
+            if (newest < temp) 
+            {
+                newest = temp;
+                temp = temp->getNext();
+            }
+            else 
+            {
+                temp = temp->getNext();
+            }
+        }
+        return newest;
+    }
+    else
+    {
+        cout << "The Stack is empty." << endl;
+        return newest;
+    }
+}
 
 
 #endif

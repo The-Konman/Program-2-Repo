@@ -85,15 +85,17 @@ int main()
 
             //Find the oldest movie    
             case 6:
-
+                MovieStack.FindOldest();
                 break;
             //Find the most recent movie
             case 7:
-
+                MovieStack.FindNewest();
                 break;
             //Sort movie stack by oldest
             case 8:
+                MovieStack.displayStack();
                 MovieStack.setTop(MovieStack.sortAscending(MovieStack.getTop()));
+                MovieStack.displayStack();
                 break;
             //Sort movie stack by newest
             case 9:
