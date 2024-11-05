@@ -27,18 +27,9 @@ class Stack
         ListNode<T>* getTop();
         void setTop(ListNode<T>*);
         
-        //ascending functions
-        ListNode<T>* sortAscending(ListNode<T>*);
-        void sortAscendingHelper(ListNode<T>*, ListNode<T>*);
-        ListNode<T>* partitionAscending(ListNode<T>*, ListNode<T>*);
 
-        //descending functions
-        void sortDescending();
-        void sortDecendingHelper(ListNode<T>*, ListNode<T>*);
-        ListNode<T>* partitionDescending(ListNode<T>*, ListNode<T>*);
-
-        ListNode<T>* FindOldest();
-        ListNode<T>* FindNewest();
+        void FindOldest();
+        void FindNewest();
 
         ListNode<T>* getTail();
         void push(T);
@@ -246,9 +237,13 @@ void Stack<T>::displayNode()
     }
 }
 
-//still broken
+/*
+    Member Function Name: FindOldest()
+    Purpose: Displays the oldest movie/finds the lowest value <T>
+    Return type: void
+*/
 template <typename T>
-ListNode<T>* Stack<T>::FindOldest()
+void Stack<T>::FindOldest()
 {
     ListNode<T>* temp = top;
     ListNode<T>* oldest = top;
@@ -256,51 +251,48 @@ ListNode<T>* Stack<T>::FindOldest()
     {
         while(temp->getNext() != NULL)
         {
-            if (oldest > temp) 
+            if (oldest->getNode() > temp->getNode()) 
             {
-                oldest = temp;
-                temp = temp->getNext();
+                oldest->setNode(temp->getNode());
+                
             }
-            else 
-            {
-                temp = temp->getNext();
-            }
+            temp = temp->getNext();
         }
-        return oldest;
+        cout << oldest->getNode();
     }
     else
     {
-        cout << "The Stack is empty." << endl;
-        return oldest;
+        cout << "\n\nThe Stack is empty.\n" << endl;
     }
 }
 
-//still broken
+
+/*
+    Member Function Name: FindNewest()
+    Purpose: Displays the newest movie/finds the highest value <T>
+    Return type: void
+*/
 template <typename T>
-ListNode<T>* Stack<T>::FindNewest()
+void Stack<T>::FindNewest()
 {
     ListNode<T>* temp = top;
-    ListNode<T>* newest = top;
+    ListNode<T>* oldest = top;
     if(!(isEmpty()))
     {
         while(temp->getNext() != NULL)
         {
-            if (newest < temp) 
+            if (oldest->getNode() < temp->getNode()) 
             {
-                newest = temp;
-                temp = temp->getNext();
+                oldest->setNode(temp->getNode());
+                
             }
-            else 
-            {
-                temp = temp->getNext();
-            }
+            temp = temp->getNext();
         }
-        return newest;
+        cout << oldest->getNode();
     }
     else
     {
-        cout << "The Stack is empty." << endl;
-        return newest;
+        cout << "\n\nThe Stack is empty.\n" << endl;
     }
 }
 

@@ -94,10 +94,12 @@ int main()
 
             //Find the oldest movie    
             case 6:
+                cout << "\n\nOldest Movie: ";
                 MovieStack.FindOldest();
                 break;
             //Find the most recent movie
             case 7:
+                cout << "\n\nNewest Movie: ";
                 MovieStack.FindNewest();
                 break;
             //Sort movie stack by oldest
