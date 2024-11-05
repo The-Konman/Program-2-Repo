@@ -91,13 +91,14 @@ int main()
             case 5:
 
                 break;
-            //Find the oldest movie
-            case 6:
 
+            //Find the oldest movie    
+            case 6:
+                MovieStack.FindOldest();
                 break;
             //Find the most recent movie
             case 7:
-
+                MovieStack.FindNewest();
                 break;
             //Sort movie stack by oldest
             case 8:
@@ -146,7 +147,8 @@ void printMenu()
     cout <<   "\n\t9. Sort Movies by Newest";
     cout <<   "\n\t10. Delete Movie Stack";
     cout <<   "\n\t11. Leave Program";
-    cout << "\n\tChoose 1-10: ";
+    cout << "\n\tChoose 1-11: ";
+
 
 }
 

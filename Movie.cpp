@@ -41,6 +41,7 @@
         {
             movieLength = m;
         }
+
         //Default Constructor
         Movie::Movie()
         {
@@ -61,5 +62,6 @@
             year = y;
             movieLength = mL;
         }
+
 
         
