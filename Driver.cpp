@@ -91,21 +91,27 @@ int main()
 
             //Find movie by title
             case 5:
-                cout << "\n\nWhat is the title of the movie you want to find?\n";
-                cin.ignore();
-                getline(cin, title2);
-                findHead = MovieStack.getTop();
-                FindMovie(title2, findHead);
+                if(!MovieStack.isEmpty())
+                {
+                    cout << "\n\nWhat is the title of the movie you want to find?\n";
+                    cin.ignore();
+                    getline(cin, title2);
+                    findHead = MovieStack.getTop();
+                    FindMovie(title2, findHead);
+                }
+                else
+                {
+                    cout << "\n\nThe Movie Stack is empty!\n";
+                }
+
                 break;
 
             //Find the oldest movie    
             case 6:
-                cout << "\n\nOldest Movie: ";
                 MovieStack.FindOldest();
                 break;
             //Find the most recent movie
             case 7:
-                cout << "\n\nNewest Movie: ";
                 MovieStack.FindNewest();
                 break;
             //Sort movie stack by oldest
@@ -122,7 +128,6 @@ int main()
                 break; 
             //Delete the entire movie stack
             case 10:
-                cout << "\n\nDeleting the stack!";
                 MovieStack.deleteStack();
                 break;
         }
@@ -162,7 +167,7 @@ void printMenu()
 
 /*
     Function Name: FindMovie()
-    Purpose: Searches stack for a specfic title and tells the user 
+    Purpose: Searches stack for a specfic title and prints it out if found
     Return type: void
 */
 void FindMovie(string title, ListNode<Movie>* head)

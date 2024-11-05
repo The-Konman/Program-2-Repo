@@ -40,9 +40,9 @@ class Stack
 };
 
 template <typename T>
-void Stack<T>::setTop(ListNode<T>* t)
+void Stack<T>::setTop(ListNode<T>* lN)
 {
-    top = t;
+    top = lN;
 }
 
 
@@ -122,7 +122,7 @@ void Stack<T>::push(T item)
 template <typename T>
 void Stack<T>::pop()  
 {
-    ListNode<T> *temp = NULL;
+    ListNode<T> *p = NULL;
 
     //If it's not empty, remove the top element and reassign pointers
     if(isEmpty())
@@ -131,9 +131,9 @@ void Stack<T>::pop()
     }
     else
     {
-        temp = top->getNext();
+        p = top->getNext();
         delete top;
-        top = temp;
+        top = p;
     }
 }
 
@@ -149,14 +149,22 @@ void Stack<T>::deleteStack()
     ListNode<T> *nodePtr, *nextNode;
 
     //Delete every node in the list until nodePtr gets to NULL
-    nodePtr = top;
-    while (nodePtr != NULL)
+    if(!isEmpty())
     {
-        nextNode = nodePtr->getNext();
-        delete nodePtr;
-        nodePtr = nextNode;
+        cout << "\n\nDeleting the stack!";
+        nodePtr = top;
+        while (nodePtr != NULL)
+        {
+            nextNode = nodePtr->getNext();
+            delete nodePtr;
+            nodePtr = nextNode;
+        }
+        top = NULL;
     }
-    top = NULL;
+    else
+    {
+        cout << "\n\nThe Movie Stack is empty!\n";
+    }
 }
 
 
@@ -242,19 +250,21 @@ void Stack<T>::displayNode()
 template <typename T>
 void Stack<T>::FindOldest()
 {
-    ListNode<T>* temp = top;
+    ListNode<T>* t = top;
     ListNode<T>* oldest = top;
     if(!(isEmpty()))
     {
-        while(temp!= NULL)
+        while(t!=NULL)
         {
-            if (oldest->getNode() > temp->getNode()) 
+            //If t is less than oldest, the new oldest becomes t
+            if (oldest->getNode() > t->getNode()) 
             {
-                oldest->setNode(temp->getNode());
+                oldest->setNode(t->getNode());
                 
             }
-            temp = temp->getNext();
+            t = t->getNext();
         }
+        cout << "\n\nOldest Movie: ";
         cout << oldest->getNode();
     }
     else
@@ -272,19 +282,21 @@ void Stack<T>::FindOldest()
 template <typename T>
 void Stack<T>::FindNewest()
 {
-    ListNode<T>* temp = top;
+    ListNode<T>* n = top;
     ListNode<T>* newest = top;
     if(!(isEmpty()))
     {
-        while(temp!=NULL)
+        while(n!=NULL)
         {
-            if (newest->getNode() < temp->getNode()) 
+            //If n is greater than newest, the new newest is set to n
+            if (newest->getNode() < n->getNode()) 
             {
-                newest->setNode(temp->getNode());
+                newest->setNode(n->getNode());
                 
             }
-            temp = temp->getNext();
+            n = n->getNext();
         }
+        cout << "\n\nNewest Movie: ";
         cout << newest->getNode();
     }
     else
