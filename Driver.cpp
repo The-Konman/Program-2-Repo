@@ -6,6 +6,7 @@
 using namespace std;
 
 void printMenu();
+void FindMovie(string, ListNode<Movie>*);
 ListNode<Movie>* getTail(ListNode<Movie>*);
 ListNode<Movie>* sortAscending(ListNode<Movie>*);
 void sortAscendingHelper(ListNode<Movie>*, ListNode<Movie>*);
@@ -19,13 +20,14 @@ int main()
 {
 
     Stack<Movie> MovieStack;
-    string genre, title, mR;
+    string genre, title, mR, title2;
     int year, length, numMovies, bO, rT, choice;
     Movie movie;
+    ListNode<Movie> *ascendingHead, *descendingHead, *findHead;
 
     do
     {
-        ListNode<Movie> *ascendingHead, *descendingHead;
+        
         printMenu();
         cin >> choice;
         //Validate user input is in the correct range
@@ -89,7 +91,11 @@ int main()
 
             //Find movie by title
             case 5:
-
+                cout << "\n\nWhat is the title of the movie you want to find?\n";
+                cin.ignore();
+                getline(cin, title2);
+                findHead = MovieStack.getTop();
+                FindMovie(title2, findHead);
                 break;
 
             //Find the oldest movie    
@@ -151,6 +157,42 @@ void printMenu()
     cout <<   "\n\t11. Leave Program";
     cout << "\n\tChoose 1-11: ";
 
+
+}
+
+/*
+    Function Name: FindMovie()
+    Purpose: Searches stack for a specfic title and tells the user 
+    Return type: void
+*/
+void FindMovie(string title, ListNode<Movie>* head)
+{
+    bool found = false;
+    Movie movie;
+    ListNode<Movie>* temp = head;
+    if(temp!=NULL)
+    {
+        while(temp!=NULL)
+        {
+            movie = temp->getNode();
+            if(movie.getTitle() == title)
+            {
+                cout << "\n\nMovie Found:\n";
+                cout << temp->getNode();
+                found = true;
+            }
+            temp = temp->getNext();
+        }
+    }
+    else
+    {
+        cout << "\n\nThe Movie Stack is empty.\n";
+    }
+    
+    if(!found)
+    {
+        cout << "\n\nMovie not found!\n";
+    }
 
 }
 

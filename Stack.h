@@ -26,11 +26,8 @@ class Stack
         //Member function prototypes
         ListNode<T>* getTop();
         void setTop(ListNode<T>*);
-        
-
         void FindOldest();
         void FindNewest();
-
         ListNode<T>* getTail();
         void push(T);
         void pop();
@@ -249,7 +246,7 @@ void Stack<T>::FindOldest()
     ListNode<T>* oldest = top;
     if(!(isEmpty()))
     {
-        while(temp->getNext() != NULL)
+        while(temp!= NULL)
         {
             if (oldest->getNode() > temp->getNode()) 
             {
@@ -269,26 +266,26 @@ void Stack<T>::FindOldest()
 
 /*
     Member Function Name: FindNewest()
-    Purpose: Displays the newest movie/finds the highest value <T>
+    Purpose: Displays the newest movie/finds the largest value <T>
     Return type: void
 */
 template <typename T>
 void Stack<T>::FindNewest()
 {
     ListNode<T>* temp = top;
-    ListNode<T>* oldest = top;
+    ListNode<T>* newest = top;
     if(!(isEmpty()))
     {
-        while(temp->getNext() != NULL)
+        while(temp!=NULL)
         {
-            if (oldest->getNode() < temp->getNode()) 
+            if (newest->getNode() < temp->getNode()) 
             {
-                oldest->setNode(temp->getNode());
+                newest->setNode(temp->getNode());
                 
             }
             temp = temp->getNext();
         }
-        cout << oldest->getNode();
+        cout << newest->getNode();
     }
     else
     {
