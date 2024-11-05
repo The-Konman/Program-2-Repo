@@ -10,6 +10,9 @@ ListNode<Movie>* getTail(ListNode<Movie>*);
 ListNode<Movie>* sortAscending(ListNode<Movie>*);
 void sortAscendingHelper(ListNode<Movie>*, ListNode<Movie>*);
 ListNode<Movie>* partitionAscending(ListNode<Movie>*, ListNode<Movie>*);
+ListNode<Movie>* sortDescending(ListNode<Movie>*);
+void sortDescendingHelper(ListNode<Movie>*, ListNode<Movie>*);
+ListNode<Movie>* partitionDescending(ListNode<Movie>*, ListNode<Movie>*);
 
 
 int main()
@@ -22,7 +25,7 @@ int main()
 
     do
     {
-        ListNode<Movie>* head;
+        ListNode<Movie> *ascendingHead, *descendingHead;
         printMenu();
         cin >> choice;
         //Validate user input is in the correct range
@@ -98,13 +101,15 @@ int main()
                 break;
             //Sort movie stack by oldest
             case 8:
-                head = MovieStack.getTop();
-                head = sortAscending(head);
-                MovieStack.setTop(head);              
+                ascendingHead = MovieStack.getTop();
+                ascendingHead = sortAscending(ascendingHead);
+                MovieStack.setTop(ascendingHead);              
                 break;
             //Sort movie stack by newest
             case 9:
-                //MovieStack.sortDescending();
+                descendingHead = MovieStack.getTop();
+                descendingHead = sortDescending(descendingHead);
+                MovieStack.setTop(descendingHead);   
                 break; 
             //Delete the entire movie stack
             case 10:
@@ -149,7 +154,7 @@ void printMenu()
 /*
     Member Function Name: getTail()
     Purpose: Finds the last element of the stack
-    Return type: ListNode<T>*
+    Return type: ListNode<Movie>*
 */
 ListNode<Movie>* getTail(ListNode<Movie>* temp)
 {
@@ -161,74 +166,165 @@ ListNode<Movie>* getTail(ListNode<Movie>* temp)
     return temp;
 }
 
-
+/*
+    Function Name: sortAscending()
+    Purpose: Uses quick sort algorithm top sort movies by oldest
+    Return type: ListNode<Movie>*
+*/
 ListNode<Movie>* sortAscending(ListNode<Movie>* head)  
 {
-    ListNode<Movie>* tail = getTail(head);
-    sortAscendingHelper(head, tail);
+    if(head!=NULL)
+    {
+        ListNode<Movie>* tail = getTail(head);
+        sortAscendingHelper(head, tail);
+    }
+    else
+    {
+        cout << "\n\nThe list is empty!\n";
+    }
     return head;
 }
 
 
 /*
-    Member Function Name: sortAscendingHelper()
+    Function Name: sortAscendingHelper()
     Purpose: Finds the pivot of the list of recursively sorts each side before and after the pivot
     Return type: void
 */
 void sortAscendingHelper(ListNode<Movie>* head, ListNode<Movie>* tail)  
 {
-    //Something is wrong here, still trying to figure it out
     if((head==NULL)||(head==tail)) 
     {
         return;
     }
     
-    // Call partition to find the pivot node
+    //Find the pivot node and return it into pivot
     ListNode<Movie>* pivot = partitionAscending(head, tail);
 
-    // Recursive call for the left part of the list (before the pivot)
+    //Use recursion to sort left side of list
     sortAscendingHelper(head, pivot);
     
-    // Recursive call for the right part of the list (after the pivot)
+    //Use recursion to sort right side of the list
     sortAscendingHelper(pivot->getNext(), tail);
 
 }
 
 
 /*
-    Member Function Name: partitionAscending()
-    Purpose: Finds tail node, then uses quick sort helper to sort the movies by year in ascending order
-    Return type: ListNode<T>*
+    Function Name: partitionAscending()
+    Purpose: Finds pivot and moves everything smaller to the left and everything bigger on the right
+    Return type: ListNode<Movie>*
 */
 ListNode<Movie>* partitionAscending(ListNode<Movie>* head, ListNode<Movie>* tail)  
 {
 
     ListNode<Movie>* pivot = head;
   
-    // 'pre' and 'curr' are used to shift all 
-      // smaller nodes' data to the left side of the pivot node
-    ListNode<Movie>* pre = head;
-    ListNode<Movie>* curr = head;
+    //Current and previous are used to move the nodes into the left side
+    ListNode<Movie>* current = head;
+    ListNode<Movie>* previous = head;
 
-    // Traverse the list until you reach the node after the tail
-    while(curr != tail->getNext()) 
+    //Go through each node until you get to the node after tail
+    while(current != tail->getNext()) 
     {
-        if(curr->getNode() < pivot->getNode()) 
+        //If the current node is less than the current pivot, swap current and previous
+        if(current->getNode() < pivot->getNode()) 
         {
-            Movie temp = curr->getNode();
-            curr->setNode(pre->getNext()->getNode());
-            pre->getNext()->setNode(temp);
-            //RIght here konnor
-            pre = pre->getNext();
+            Movie temp = current->getNode();
+            current->setNode(previous->getNext()->getNode());
+            previous->getNext()->setNode(temp);
+            previous = previous->getNext();
         }
         
-          // Move 'curr' to the next node
-        curr = curr->getNext();
+        //Go to the next node
+        current = current->getNext();
+    }
+    //Swap the data of pivot and previous
+    Movie currData = pivot->getNode();
+    pivot->setNode(previous->getNode());
+    previous->setNode(currData);
+
+    return previous;
+}
+
+
+/*
+    Function Name: sortDescending()
+    Purpose: Uses quick sort algorithm top sort movies by newest
+    Return type: ListNode<Movie>*
+*/
+ListNode<Movie>* sortDescending(ListNode<Movie>* head)  
+{
+    if(head!=NULL)
+    {
+        ListNode<Movie>* tail = getTail(head);
+        sortDescendingHelper(head, tail);
+    }
+    else
+    {
+        cout << "\n\nThe list is empty!\n";
+    }
+    return head;
+}
+
+
+/*
+    Function Name: sortDescendingHelper()
+    Purpose: Finds the pivot of the list of recursively sorts each side before and after the pivot
+    Return type: void
+*/
+void sortDescendingHelper(ListNode<Movie>* head, ListNode<Movie>* tail)  
+{
+    if((head==NULL)||(head==tail)) 
+    {
+        return;
     }
     
-    Movie currData = pivot->getNode();
-    pivot->setNode(pre->getNode());
-    pre->setNode(currData);
+    //Find the pivot node and return it into pivot
+    ListNode<Movie>* pivot = partitionDescending(head, tail);
 
-    return pre;
+    //Use recursion to sort left side of list
+    sortDescendingHelper(head, pivot);
+    
+    //Use recursion to sort right side of the list
+    sortDescendingHelper(pivot->getNext(), tail);
+
+}
+
+
+/*
+    Function Name: partitionDescending()
+    Purpose: Finds pivot and moves everything smaller to the left and everything bigger on the right
+    Return type: ListNode<Movie>*
+*/
+ListNode<Movie>* partitionDescending(ListNode<Movie>* head, ListNode<Movie>* tail)  
+{
+
+    ListNode<Movie>* pivot = head;
+  
+    //Current and previous are used to move the nodes into the left side
+    ListNode<Movie>* current = head;
+    ListNode<Movie>* previous = head;
+
+    //Go through each node until you get to the node after tail
+    while(current != tail->getNext()) 
+    {
+        //If the current node is larger than the current pivot, swap current and previous
+        if(current->getNode() > pivot->getNode()) 
+        {
+            Movie temp = current->getNode();
+            current->setNode(previous->getNext()->getNode());
+            previous->getNext()->setNode(temp);
+            previous = previous->getNext();
+        }
+        
+        //Go to the next node
+        current = current->getNext();
+    }
+    //Swap the data of pivot and previous
+    Movie currData = pivot->getNode();
+    pivot->setNode(previous->getNode());
+    previous->setNode(currData);
+
+    return previous;
 }
