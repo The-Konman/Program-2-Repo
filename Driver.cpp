@@ -22,6 +22,7 @@ int main()
 
     do
     {
+        ListNode<Movie>* head;
         printMenu();
         cin >> choice;
         //Validate user input is in the correct range
@@ -97,7 +98,9 @@ int main()
                 break;
             //Sort movie stack by oldest
             case 8:
-                MovieStack.setTop(sortAscending(MovieStack.getTop()));
+                head = MovieStack.getTop();
+                head = sortAscending(head);
+                MovieStack.setTop(head);              
                 break;
             //Sort movie stack by newest
             case 9:
@@ -177,7 +180,6 @@ void sortAscendingHelper(ListNode<Movie>* head, ListNode<Movie>* tail)
     //Something is wrong here, still trying to figure it out
     if((head==NULL)||(head==tail)) 
     {
-        cout << "\n\nTEST\n\n";
         return;
     }
     
@@ -214,9 +216,9 @@ ListNode<Movie>* partitionAscending(ListNode<Movie>* head, ListNode<Movie>* tail
         if(curr->getNode() < pivot->getNode()) 
         {
             Movie temp = curr->getNode();
-            curr->getNode() = pre->getNext()->getNode();
-            pre->getNext()->getNode() = temp;
-
+            curr->setNode(pre->getNext()->getNode());
+            pre->getNext()->setNode(temp);
+            //RIght here konnor
             pre = pre->getNext();
         }
         
@@ -225,8 +227,8 @@ ListNode<Movie>* partitionAscending(ListNode<Movie>* head, ListNode<Movie>* tail
     }
     
     Movie currData = pivot->getNode();
-    pivot->getNode() = pre->getNode();
-    pre->getNode() = currData;
+    pivot->setNode(pre->getNode());
+    pre->setNode(currData);
 
     return pre;
 }
