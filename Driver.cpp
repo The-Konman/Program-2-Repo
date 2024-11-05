@@ -6,6 +6,11 @@
 using namespace std;
 
 void printMenu();
+ListNode<Movie>* getTail(ListNode<Movie>*);
+ListNode<Movie>* sortAscending(ListNode<Movie>*);
+void sortAscendingHelper(ListNode<Movie>*, ListNode<Movie>*);
+ListNode<Movie>* partitionAscending(ListNode<Movie>*, ListNode<Movie>*);
+
 
 int main()
 {
@@ -92,7 +97,7 @@ int main()
                 break;
             //Sort movie stack by oldest
             case 8:
-                MovieStack.setTop(MovieStack.sortAscending(MovieStack.getTop()));
+                MovieStack.setTop(sortAscending(MovieStack.getTop()));
                 break;
             //Sort movie stack by newest
             case 9:
@@ -135,4 +140,93 @@ void printMenu()
     cout <<   "\n\t11. Leave Program";
     cout << "\n\tChoose 1-10: ";
 
+}
+
+
+/*
+    Member Function Name: getTail()
+    Purpose: Finds the last element of the stack
+    Return type: ListNode<T>*
+*/
+ListNode<Movie>* getTail(ListNode<Movie>* temp)
+{
+    while((temp->getNext()!=NULL)&&(temp != NULL))
+    {
+        temp = temp->getNext();
+    }
+    
+    return temp;
+}
+
+
+ListNode<Movie>* sortAscending(ListNode<Movie>* head)  
+{
+    ListNode<Movie>* tail = getTail(head);
+    sortAscendingHelper(head, tail);
+    return head;
+}
+
+
+/*
+    Member Function Name: sortAscendingHelper()
+    Purpose: Finds the pivot of the list of recursively sorts each side before and after the pivot
+    Return type: void
+*/
+void sortAscendingHelper(ListNode<Movie>* head, ListNode<Movie>* tail)  
+{
+    //Something is wrong here, still trying to figure it out
+    if((head==NULL)||(head==tail)) 
+    {
+        cout << "\n\nTEST\n\n";
+        return;
+    }
+    
+    // Call partition to find the pivot node
+    ListNode<Movie>* pivot = partitionAscending(head, tail);
+
+    // Recursive call for the left part of the list (before the pivot)
+    sortAscendingHelper(head, pivot);
+    
+    // Recursive call for the right part of the list (after the pivot)
+    sortAscendingHelper(pivot->getNext(), tail);
+
+}
+
+
+/*
+    Member Function Name: partitionAscending()
+    Purpose: Finds tail node, then uses quick sort helper to sort the movies by year in ascending order
+    Return type: ListNode<T>*
+*/
+ListNode<Movie>* partitionAscending(ListNode<Movie>* head, ListNode<Movie>* tail)  
+{
+
+    ListNode<Movie>* pivot = head;
+  
+    // 'pre' and 'curr' are used to shift all 
+      // smaller nodes' data to the left side of the pivot node
+    ListNode<Movie>* pre = head;
+    ListNode<Movie>* curr = head;
+
+    // Traverse the list until you reach the node after the tail
+    while(curr != tail->getNext()) 
+    {
+        if(curr->getNode() < pivot->getNode()) 
+        {
+            Movie temp = curr->getNode();
+            curr->getNode() = pre->getNext()->getNode();
+            pre->getNext()->getNode() = temp;
+
+            pre = pre->getNext();
+        }
+        
+          // Move 'curr' to the next node
+        curr = curr->getNext();
+    }
+    
+    Movie currData = pivot->getNode();
+    pivot->getNode() = pre->getNode();
+    pre->getNode() = currData;
+
+    return pre;
 }

@@ -54,18 +54,18 @@ class Movie {
         }
 
 
-        //Overload comparision operatora
+        //Overload comparision operators
         bool operator>(const Movie& m)
         {
-            return this->year > m.year;
+            return year > m.year;
         }
         bool operator<(const Movie& m)
         {
-            return this->year < m.year;
+            return year < m.year;
         }
         bool operator==(const Movie& m)
         {
-            return this->year == m.year;
+            return year == m.year;
         }
     
         

@@ -1,5 +1,5 @@
-#ifndef MOVIESTACK_H
-#define MOVIESTACK_H
+#ifndef STACK_H
+#define STACK_H
 
 #include <iostream>
 #include <string>
@@ -8,14 +8,12 @@
 using namespace std;
 
 
-//DELETE LATER, FOR TESTING
-//cout << "\nTEST\n";
 template <typename T>
 class Stack
 {
     
     private:
-        ListNode<T> *top;
+        ListNode<T>* top;
         
     
     public:
@@ -26,7 +24,7 @@ class Stack
         ~Stack();
    
         //Member function prototypes
-        ListNode<T>* getTop() const;
+        ListNode<T>* getTop();
         void setTop(ListNode<T>*);
         ListNode<T>* sortAscending(ListNode<T>*);
         void sortAscendingHelper(ListNode<T>*, ListNode<T>*);
@@ -53,7 +51,7 @@ void Stack<T>::setTop(ListNode<T>* t)
 
 
 template <typename T>
-ListNode<T>* Stack<T>::getTop() const
+ListNode<T>* Stack<T>::getTop() 
 {
     return top;
 }
@@ -219,107 +217,6 @@ void Stack<T>::displayStack()
     
 }
 
-
-/*
-    Member Function Name: getTail()
-    Purpose: Finds the last element of the stack
-    Return type: ListNode<T>*
-*/
-template <typename T>
-ListNode<T>* Stack<T>::getTail()
-{
-    ListNode<T>* temp = top;
-    while((temp->getNext()!=NULL)&&(temp != NULL))
-    {
-        temp = temp->getNext();
-    }
-    
-    return temp;
-}
-   
-
-/*
-    Member Function Name: sortAscending()
-    Purpose: Finds tail node, then uses quick sort helper to sort the movies by year in ascending order
-    Return type: void
-*/
-template <typename T>
-ListNode<T>* Stack<T>::sortAscending(ListNode<T>* head)  
-{
-    ListNode<T>* tail = getTail();
-    sortAscendingHelper(head, tail);
-    return head;
-}
-
-
-/*
-    Member Function Name: sortAscendingHelper()
-    Purpose: Finds the pivot of the list of recursively sorts each side before and after the pivot
-    Return type: void
-*/
-template <typename T>
-void Stack<T>::sortAscendingHelper(ListNode<T>* head, ListNode<T>* tail)  
-{
-    //Something is wrong here, still trying to figure it out
-    if((head==NULL)||(head==tail)) 
-    {
-        cout << "\n\nTEST\n\n";
-        return;
-    }
-    
-    // Call partition to find the pivot node
-    ListNode<T>* pivot = partitionAscending(head, tail);
-    cout << "\n\n\nTEST FOR CURRENT PIVOT\n";
-    cout << pivot->getNode();
-
-    // Recursive call for the left part of the list (before the pivot)
-    sortAscendingHelper(head, pivot);
-    
-    // Recursive call for the right part of the list (after the pivot)
-    sortAscendingHelper((pivot->getNext()), tail);
-
-}
-
-
-/*
-    Member Function Name: partitionAscending()
-    Purpose: Finds tail node, then uses quick sort helper to sort the movies by year in ascending order
-    Return type: ListNode<T>*
-*/
-template <typename T>
-ListNode<T>* Stack<T>::partitionAscending(ListNode<T>* head, ListNode<T>* tail)  
-{
-
-    ListNode<T>* pivot = head;
-  
-    // 'pre' and 'curr' are used to shift all 
-      // smaller nodes' data to the left side of the pivot node
-    ListNode<T>* pre = head;
-    ListNode<T>* curr = head;
-
-    // Traverse the list until you reach the node after the tail
-    while(curr!=(tail->getNext())) 
-    {
-        
-        if((curr->getNode())<(pivot->getNode())) 
-        {
-            T temp = curr->getNode();
-            curr->getNode() = pre->getNext()->getNode();
-            pre->getNext()->getNode() = temp;
-
-            pre = pre->getNext();
-        }
-        
-          // Move 'curr' to the next node
-        curr = curr->getNext();
-    }
-    
-    T currData = pivot->getNode();
-    pivot->getNode() = pre->getNode();
-    pre->getNode() = currData;
-
-    return pre;
-}
 
 
 /*
